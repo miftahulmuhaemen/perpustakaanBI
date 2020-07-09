@@ -171,16 +171,15 @@
 </div>
 <body id="body">
 	<?php if ($this->session->userdata('login')==1):?>
-		<header class="bg-white header box-shadow">
+		<header class="pt-2 bg-white">
 			<nav class="animated fadeIn px-0 text-center navbar navbar-expand-lg white-color scrolling-navbar z-depth-0">
-				<img id="navbarImg" src="<?php echo base_url('assets/img/perpus_bi.ico') ?>" class="pl-4 navbar-brand" alt="Responsive image">
+				<img id="navbarImg" src="<?php echo base_url('assets/img/perpus_bi.ico') ?>" class="pl-4 navbar-brand position-fixed img-fluid" alt="Responsive image">
 				<button class="navbar-toggler" type="button" id="sidebarBtn" onclick="openNav()">
-					<i id='navToggle' class="white-text fa fa-2x fa-plus"></i>
+					<i id='navToggle' class="indigo-text fa fa-2x fa-plus"></i>
 				</button>
-				<a id="dropdown" data-toggle="dropdown" href="#sidebarUser"
-          aria-expanded="false" aria-controls="collapseExample" >
+				<a id="dropdown" data-toggle="dropdown" href="#sidebarUser" aria-expanded="false" aria-controls="collapseExample" >
 					<div class="dropdown-toggler m-1 mr-3 rounded-lg" >
-						<i class="white-text fas fa-3x fa-user-circle"></i>
+						<i class="indigo-text fas fa-3x fa-user-circle"></i>
 					</div>
 				</a>
 				<div class="dropdown-menu fixed mr-3" style="left: auto;right:0px">
