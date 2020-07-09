@@ -27,7 +27,7 @@
             <div class="w-100<?php if(!isset($buku))echo " col-md-6"; ?> text-center">
 
               <?php if(!isset($buku)): ?>
-                <img class="logo-cari" src="<?php echo base_url('assets/img/perpus_bi_white.ico') ?>" alt="thumbnail"  style="width: 300px">
+                <img class="logo-cari" src="<?php echo base_url('assets/img/logo.ico') ?>" alt="thumbnail"  style="width: 300px">
               <?php endif; ?>
 
               <form class="input-group py-1 mb-4 border border-1 rounded-pill pr-4 white"  method="get" action="<?php echo base_url('cari-buku') ?>">
