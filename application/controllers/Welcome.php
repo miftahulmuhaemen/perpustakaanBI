@@ -77,9 +77,7 @@ class Welcome extends CI_Controller
 	function hadir($value)
 	{
 		if (decrypt_url($value) == "")
-			redirect(base_url());
-
-		$data['page']				= 'kunjungan';
+		$data['page']			= 'kunjungan';
 		$data['title'] 			= 'Regis Pengunjung';
 		$data['bicoid']			= $value;
 		$data['bicorner'] 	= $this->m_perpustakaan->getById(decrypt_url($value));
