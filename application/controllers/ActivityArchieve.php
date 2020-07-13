@@ -7,7 +7,7 @@ class ActivityArchieve extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('m_activityarchieve');
+        $this->load->model('M_activityArchieve');
         if ($this->session->userdata('level') >= 5) {
             redirect(base_url());
         }
@@ -15,14 +15,14 @@ class ActivityArchieve extends CI_Controller
 
     function get()
     {
-        $response = $this->m_activityarchieve->get();
+        $response = $this->M_activityArchieve->get();
         echo json_encode($response);
     }
 
     function getActivities()
     {
         $value = array('id_bi_corner' => $this->input->post('libraryID'));
-        $response = $this->m_activityarchieve->getActivities($value);
+        $response = $this->M_activityArchieve->getActivities($value);
         echo json_encode($response);
     }
 
@@ -30,7 +30,7 @@ class ActivityArchieve extends CI_Controller
     {
         $activityID = array('id_penilaian' => $this->input->post('id'));
         $imagesID = array('id_kegiatan' => $this->input->post('id'));
-        $response = $this->m_activityarchieve->deleteActivity($activityID, $imagesID);
+        $response = $this->M_activityArchieve->deleteActivity($activityID, $imagesID);
         echo json_encode($response);
     }
 
@@ -43,7 +43,7 @@ class ActivityArchieve extends CI_Controller
 
         $this->load->library('image_lib');
         $this->load->library('upload', $config);
-        $this->m_activityarchieve->transStart();
+        $this->M_activityArchieve->transStart();
 
         $postactivity = array(
             'id_bi_corner' => $_POST['libraryName'],
@@ -54,9 +54,9 @@ class ActivityArchieve extends CI_Controller
             'jumlah_peserta' => $_POST['activityAttendant'],
         );
 
-        $activityID = $this->m_activityarchieve->insert($postactivity);
+        $activityID = $this->M_activityArchieve->insert($postactivity);
 
-        if ($this->m_activityarchieve->transStatus()) {
+        if ($this->M_activityArchieve->transStatus()) {
 
             if (!empty($_FILES['files']['name'])) {
 
@@ -106,10 +106,10 @@ class ActivityArchieve extends CI_Controller
                 if ($errorMsg != null) {
                     $errorMsg = 'Kemungkinan gambar melebihi berat maksimal (1MB) atau jenis gambar salah (GIF,JPG/JPEG,PNG), ' . $errorMsg;
                 } else {
-                    if (!$this->m_activityarchieve->insertFiles($postFiles))
+                    if (!$this->M_activityArchieve->insertFiles($postFiles))
                         $errorMsg .= 'Gambar gagal diunggah.';
                     else
-                        $this->m_activityarchieve->transComplete();
+                        $this->M_activityArchieve->transComplete();
                 }
             } else {
                 $errorMsg .= 'Tidak ada data yang diterima.';
@@ -119,7 +119,7 @@ class ActivityArchieve extends CI_Controller
         }
 
         $response = array(
-            'errorDatabaseStatus' =>  !$this->m_activityarchieve->transStatus(),
+            'errorDatabaseStatus' =>  !$this->M_activityArchieve->transStatus(),
             'errorMessage' => $errorMsg,
             'errorFile' => $this->upload->display_errors(),
         );
@@ -130,7 +130,7 @@ class ActivityArchieve extends CI_Controller
     public function export()
     {
         $value = array('id_bi_corner' => $this->input->post('libraryID'));
-        $response = $this->m_activityarchieve->exportXLSX($value);
+        $response = $this->M_activityArchieve->exportXLSX($value);
         echo json_encode($response);
     }
 }

@@ -72,7 +72,7 @@
 
 </div>
 
-<?php $this->load->view('pages/admin/visitorArchieveModals/modalExportArchieve') ?>
+<?php $this->load->view('pages/admin/VisitorArchieveModals/modalExportArchieve') ?>
 
 <script>
     var chartData;
@@ -102,7 +102,7 @@
             libraryID: libraryID,
         }
         
-        $.post("<?php echo site_url('visitorarchieve/getVisitors') ?>", value)
+        $.post("<?php echo site_url('VisitorArchieve/getVisitors') ?>", value)
             .done(function(data, status) {
 
                 $('#loading' + indexReportsGroup).remove()
@@ -119,17 +119,15 @@
                 })
             })
             .fail(function(e, status, thrown) {
-
+                alert('Server mengalami masalah')
             })
     }
 
     function getData() {
 
-        $.post("<?php echo site_url('visitorarchieve/get') ?>")
+        $.post("<?php echo site_url('VisitorArchieve/get') ?>")
             .done(function(data, status) {
                 var response = $.parseJSON(data)
-
-                console.log(response)
 
                 chartData = response.chartData
                 totalVisitor = response.totalVisitor

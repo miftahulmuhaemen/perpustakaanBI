@@ -131,7 +131,7 @@
             <div class="input-group  ">
                 <input id="search" type="text" class="form-control" placeholder="Saya mencari ...">
                 <div class="input-group-append">
-                    <button id="btn-search" onclick="start = 0,getBooks()" class="btn btn-md mauve text-white  rounded-right m-0 px-3 py-2 z-depth-0 waves-effect" type="submit" id="button-addon2">Cari</button>
+                    <button id="btn-search" onclick="refresh()" class="btn btn-md mauve text-white  rounded-right m-0 px-3 py-2 z-depth-0 waves-effect" type="submit" id="button-addon2">Cari</button>
                 </div>
             </div>
         </div>
@@ -174,14 +174,10 @@
 
     $(document).ready(function() {
 
+
         /** onChange */
         $('#page, #sort').change(function() {
-            start = 0
-            var state = $('#state').val()
-            if (state != 'book')
-                getPublications()
-            else
-                getBooks()
+            refresh()
         })
 
         $('#state').change(function() {
@@ -264,6 +260,16 @@
         $('#state').trigger('change')
 
     });
+
+
+    function refresh() {
+        start = 0
+        var state = $('#state').val()
+        if (state != 'book')
+            getPublications()
+        else
+            getBooks()
+    }
 
     function getBooks() {
 
@@ -411,12 +417,15 @@
         $.post("<?php echo site_url('publication/get') ?>", value)
             .done(function(data, status) {
                 var publications = JSON.parse(data)
-
+console.log(publications)
                 /** Counter */
                 var counterBook = publications.totalBookRecords
                 var counterPublication = publications.totalPublicationRecords
+                var counterBorrowing = publications.totalBorrowing
                 var counterBorrowed = publications.totalBorrowed
-                counting(counterBook, counterPublication, counterBorrowed)
+                var counterReturnedBorrow = publications.totalReturnedBorrow
+                counting(counterBook, counterPublication, counterBorrowing, counterBorrowed, counterReturnedBorrow)
+
 
                 /** Fetch data */
                 var datas = publications.data

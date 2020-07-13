@@ -48,7 +48,6 @@ class M_relasi extends CI_Model{
 			$total	= $total + $this->m_db->count_row($publikasi);
 		}
 
-
 		return $total;
 	}
 }

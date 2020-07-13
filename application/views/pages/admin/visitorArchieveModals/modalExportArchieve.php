@@ -72,7 +72,7 @@
 
         showButtonLoading('#btn-export')
 
-        $.post("<?php echo site_url('visitorarchieve/export') ?>", value)
+        $.post("<?php echo site_url('VisitorArchieve/export') ?>", value)
             .done(function(data, status) {
 
                 hideButtonLoading('#btn-export', 'Ekspor', 'fa-arrow-alt-circle-down')
@@ -119,9 +119,7 @@
 
             })
             .fail(function(e, status, thrown) {
-
-                console.log(e, status)
-
+                alert('Server mengalami masalah')
             })
 
     })

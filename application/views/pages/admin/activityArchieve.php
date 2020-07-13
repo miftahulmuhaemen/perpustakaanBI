@@ -77,8 +77,8 @@
 
 </div>
 
-<?php $this->load->view('pages/admin/activityArchieveModals/modalAddActivity') ?>
-<?php $this->load->view('pages/admin/activityArchieveModals/modalExportActivity') ?>
+<?php $this->load->view('pages/admin/ActivityArchieveModals/modalAddActivity') ?>
+<?php $this->load->view('pages/admin/ActivityArchieveModals/modalExportActivity') ?>
 
 <script>
     var chartData;
@@ -105,7 +105,7 @@
                 id: activityID,
             }
 
-            $.post("<?php echo site_url('activityarchieve/deleteactivity') ?>", value)
+            $.post("<?php echo site_url('ActivityArchieve/deleteactivity') ?>", value)
                 .done(function(data, status) {
 
                     getData()
@@ -127,7 +127,7 @@
             libraryID: libraryID,
         }
 
-        $.post("<?php echo site_url('activityarchieve/getActivities') ?>", value)
+        $.post("<?php echo site_url('ActivityArchieve/getActivities') ?>", value)
             .done(function(data, status) {
 
                 $('#loading' + indexActivitiesGroup).remove()
@@ -184,8 +184,9 @@
     function getData() {
 
 
-        $.post("<?php echo site_url('activityarchieve/get') ?>")
+        $.post("<?php echo site_url('ActivityArchieve/get') ?>")
             .done(function(data, status) {
+
                 var response = $.parseJSON(data)
 
                 chartData = response.chartData

@@ -72,7 +72,7 @@
 
         showButtonLoading('#btn-export')
 
-        $.post("<?php echo site_url('activityarchieve/export') ?>", value)
+        $.post("<?php echo site_url('ActivityArchieve/export') ?>", value)
             .done(function(data, status) {
 
                 hideButtonLoading('#btn-export', 'Ekspor', 'fa-arrow-alt-circle-down')

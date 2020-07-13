@@ -25,10 +25,24 @@ class M_publication extends CI_Model
     if ($searchValue != '') {
       $searchQuery = " (edisi like '%" . $searchValue . "%' or judul like '%" . $searchValue . "%' or tgl_terbit like'%" . $searchValue . "%' or tgl_periksa like'%" . $searchValue . "%' or status like'%" . $searchValue . "%' ) ";
     }
+    
+    $this->db->select('count(*) as allcount');
+		$this->db->where('tb_pinjam.no_barcode = tb_buku.no_barcode');
+		$this->db->where('status', 1);
+    $this->db->from($this->tb_buku);
+    $this->db->from($this->tb_pinjam);
+    $records = $this->db->get()->result();
+    $totalBorrowing = $records[0]->allcount;
 
     $this->db->select('count(*) as allcount');
+		$this->db->where('status', 2);
     $records = $this->db->get($this->tb_pinjam)->result();
     $totalBorrowed = $records[0]->allcount;
+
+    $this->db->select('count(*) as allcount');
+		$this->db->where('status', 3);
+    $records = $this->db->get($this->tb_pinjam)->result();
+    $totalReturnedBorrow = $records[0]->allcount;
 
     $this->db->select('count(*) as allcount');
     $records = $this->db->get($this->tb_publikasi)->result();
@@ -68,7 +82,9 @@ class M_publication extends CI_Model
       "totalBookRecords" => $totalBookRecords,
       "totalPublicationRecords" => $totalPublicationRecords,
       "totalPublicationRecordwithFilter" => $totalPublicationRecordwithFilter,
+      "totalBorrowing" => $totalBorrowing,
       "totalBorrowed" => $totalBorrowed,
+      "totalReturnedBorrow" => $totalReturnedBorrow,
       "data" => $data
     );
 

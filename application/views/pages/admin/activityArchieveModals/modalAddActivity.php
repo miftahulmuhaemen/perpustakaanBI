@@ -141,7 +141,7 @@
                         showButtonLoading('#btn-add-activity')
                         $.ajax({
                             type: "POST",
-                            url: "<?php echo site_url('activityarchieve/insert') ?>",
+                            url: "<?php echo site_url('ActivityArchieve/insert') ?>",
                             dataType: "application/json",
                             data: formData,
                             contentType: false,
