@@ -23,9 +23,23 @@ class Borrow extends CI_Controller
 
     function update()
     {
-        $postData = array(
-            'status' => $this->input->post('status'),
-        );
+        $status = $this->input->post('status');
+        $admin = $this->input->post('admin');
+        $now = date('Y-m-d H:i:s');
+
+        if($status == "2"){
+            $postData = array(
+                'status' => $status,
+                'admin_pinjam' => $admin,
+                'tgl_pinjam' => $now
+            );
+        } else {
+            $postData = array(
+                'status' => $status,
+                'admin_kembali' => $admin,
+                'tgl_kembali' => $now
+            );
+        }
 
         $where = array(
             'Id_pinjam' => $this->input->post('ID')

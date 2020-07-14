@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 date_default_timezone_set('Asia/Makassar');
-$config['base_url'] = 'http://localhost/webdev/';
+$config['base_url'] = 'http://localhost/dev/';
 
 $config['index_page'] = '';
 

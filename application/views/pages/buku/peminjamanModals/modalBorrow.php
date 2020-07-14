@@ -81,11 +81,13 @@
 
             var value = {
                 ID: ID,
+                admin: "<?php echo decrypt_url($this->session->userdata('id_anggota')); ?>",
                 status: updateStatus
             }
 
             $.post("<?php echo site_url('borrow/update') ?>", value)
                 .done(function() {
+
                     getBorrow()
 
                     var state = $('#state').val()
