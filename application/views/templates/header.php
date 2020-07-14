@@ -193,7 +193,7 @@
 				<div class="collapse navbar-collapse" >
 					<ul class="nav navbar-right m-n hidden-xs nav-user user">
 						<li class="nav-item">
-							<a class="font-weight-bold blue-grey-text" style="margin-left:12px">
+							<a class="font-weight-bold blue-grey-text" style="margin-left:130px">
                 <?php echo strtoupper($title) ?>
               </a>
 						</li>

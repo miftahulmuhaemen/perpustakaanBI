@@ -90,56 +90,6 @@
 			</div>
 		<?php endforeach; ?>
 	</div>
-	<?php if ($data['totalUser'] > 10) : ?>
-
-		<div class="white z-depth-1 rounded-lg container">
-			<div class="col m-auto">
-				<nav aria-label="Page navigation example">
-					<ul class="pagination pg-indigo d-flex mt-3 pt-1 align-items-center">
-						<?php
-						$keyword = $data['keyword'];
-						$p = $this->input->get('p');
-						$limit = 10;
-						if (!isset($p)) {
-							$p = 1;
-						}
-
-						if (($data['totalUser']) % $limit > 0) {
-							$mod = 1;
-						} else {
-							$mod = 0;
-						}
-						?>
-						<li class="page-item ml-auto <?php if ($p == 1) echo "disabled"; ?>">
-							<a href="kelola-user?keyword=<?php echo $keyword; ?>&p=1<?php if ($this->input->get('limit') != null) echo "&limit=" . $this->input->get('limit'); ?>" class="page-link" tabindex="-1">First</a>
-						</li>
-						<li class="page-item <?php if ($p == 1) echo "disabled"; ?>">
-							<a href="kelola-user?keyword=<?php echo $keyword; ?>&p=<?php echo ($p - 1); ?><?php if ($this->input->get('limit') != null) echo "&limit=" . $this->input->get('limit'); ?>" class="page-link" tabindex="-1">Previous</a>
-						</li><?php
-								for ($i = -3; $i < 2; $i++) {
-									if ((($data['totalUser']) - ($data['totalUser']) % $limit) / $limit + $mod == $p + $i) {
-										break;
-									}
-									if ($p + $i >= 0) : ?>
-								<li class="page-item <?php if ($p + $i + 1 == $p) : ?> active <?php endif; ?>">
-									<a <?php if ($p + $i + 1 != $p) : ?>href="kelola-user?keyword=<?php echo $keyword; ?>&p=<?php echo ($p + $i + 1); ?><?php if ($this->input->get('limit') != null) echo "&limit=" . $this->input->get('limit'); ?>" <?php endif; ?> class="page-link"><?php echo ($p + $i + 1); ?> <span class="sr-only"></span></a>
-								</li>
-						<?php endif;
-								} ?>
-						<?php
-						?>
-						<li class="page-item <?php if ((($data['totalUser']) - ($data['totalUser']) % $limit) / $limit + $mod == $p) echo "disabled"; ?>">
-							<a href="kelola-user?keyword=<?php echo $keyword; ?>&p=<?php echo ($p + 1); ?><?php if ($this->input->get('limit') != null) echo "&limit=" . $this->input->get('limit'); ?>" class="page-link">Next</a>
-						</li>
-						<li class="page-item mr-auto <?php if ((($data['totalUser']) - ($data['totalUser']) % $limit) / $limit + 1 == $p) echo "disabled"; ?>">
-							<a href="kelola-user?keyword=<?php echo $keyword; ?>&p=<?php echo (($data['totalUser']) - ($data['totalUser']) % $limit) / $limit + $mod; ?><?php if ($this->input->get('limit') != null) echo "&limit=" . $this->input->get('limit'); ?>" class="page-link" tabindex="-1">Last</a>
-						</li>
-						<?php ?>
-					</ul>
-				</nav>
-			</div>
-		</div>
-	<?php endif; ?>
 </div>
 
 <style media="screen">

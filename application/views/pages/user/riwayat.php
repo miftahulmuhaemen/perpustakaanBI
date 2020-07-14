@@ -4,7 +4,7 @@
 			<div class="col-lg-5">Judul</div>
 			<div class="col-lg-2">Tanggal Pinjam</div>
 			<div class="col-lg-2">Tanggal Kembali</div>
-			<div class="col-lg-2">Waktu Pemesanan</div>
+			<div class="col-lg-2">Status Peminjaman</div>
 			<div class="col-lg-1"></div>
 			<div class="col-12">
 				<hr>
@@ -40,9 +40,8 @@
 			<div class="pinjam rounded-lg mb-2">
 				<div class="row">
 					<div class="col-lg-5 d-flex align-items-center"><i class="icon fas fa-book"></i><?php echo $key->judul ?></div>
-					<div class="col-lg-2 d-flex align-items-center"><i class="icon fas fa-calendar"><small>&nbsp Tanggal Pinjam &nbsp:</small></i><small><?php echo $key->tgl_pinjam ?></small> </div>
+					<div class="col-lg-2 d-flex align-items-center"><i class="icon fas fa-calendar"><small>&nbsp Tanggal Pinjam &nbsp:</small></i><small><?php echo $time ?></small> </div>
 					<div class="col-lg-2 d-flex align-items-center"><i class="icon fas fa-calendar"><small>&nbsp Tanggal Kembali &nbsp:</small> </i><small><?php echo $key->tgl_pinjam ?></small> </div>
-					<div class="col-lg-2 d-flex align-items-center"><?php echo $time ?></div>
 					<div class="col-lg-1 d-flex align-items-center text-right">
 						<?php if ($key->status==1){ ?>
 							<a href="<?php echo base_url('buku/batal/'.encrypt_url($key->Id_pinjam)) ?>"><h6><span class="badge rgba-orange-strong">Batal</span></h6></a>
