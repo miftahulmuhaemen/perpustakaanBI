@@ -72,7 +72,6 @@
 					<p class="grey-darken-text mb-4 pb-2 text-center">Sistem Pengelolaan Pelayanan <br>Perpustakaan Bank Indonesia Provinsi Kalimantan Selatan</p>
 					<img src="<?php echo base_url('/assets/img/LOGIN.png') ?>" class="img-fluid mx-auto" style="height:300px">
 					<div class="text-center white-text">
-						<!--<a class="white-text" href="https://www.freepik.com/">Designed by Freepik</a>-->
 					</div>
 				</div>
 			</div>

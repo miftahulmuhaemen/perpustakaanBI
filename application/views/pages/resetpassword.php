@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button id="btn-reset-password" onclick="resetPassword()" class="btn btn-indigo btn-rounded rounded-pill px-5 w-100 my-4 waves-effect">Atur Ulang</button>
+                        <button id="btn-reset-password" onclick="ResetPassword()" class="btn btn-indigo btn-rounded rounded-pill px-5 w-100 my-4 waves-effect">Atur Ulang</button>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
     var btnResetPassword = $('#btn-reset-password');
 
     $(document).ready(function() {
-        $.post("<?php echo site_url('resetpassword/istokenvalid') ?>", {
+        $.post("<?php echo site_url('ResetPassword/istokenvalid') ?>", {
                 token: '<?php echo $token ?>'
             })
             .done(function(data, status) {
@@ -64,11 +64,11 @@
             })
     })
 
-    function resetPassword() {
+    function ResetPassword() {
 
         var password = $('#password-reset').val()
         showButtonLoading(btnResetPassword)
-        $.post("<?php echo site_url('resetpassword/resetPassword') ?>", {
+        $.post("<?php echo site_url('ResetPassword/ResetPassword') ?>", {
                 memberID: memberID,
                 password: password
             })

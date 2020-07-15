@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class User extends CI_Controller
 {
@@ -20,6 +17,7 @@ class User extends CI_Controller
 		if (!$this->session->has_userdata('login') || !$this->session->has_userdata('id')) {
 			redirect('login');
 		} else if ($this->session->userdata('login') == 0 && (strcmp(substr($url, 0, 9), "cari-buku") == 0 || strcmp(substr($url, 0, 11), "user/logout") == 0)) {
+
 		} else if ($this->session->userdata('login') == 0 && (strcmp(substr($url, 0, 9), "cari-buku") != 0 || strcmp(substr($url, 0, 11), "user/logout") != 0)) {
 			redirect(base_url('cari-buku'));
 		}

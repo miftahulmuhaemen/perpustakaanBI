@@ -1,34 +1,40 @@
 <style>
-	input{
-		border: 0px!important;
+	input {
+		border: 0px !important;
 	}
-	hr{
+
+	hr {
 		margin: 0
 	}
+
 	input.date {
-    position: relative;
-    width: 150px; height: 20px;
-    color: white;
+		position: relative;
+		width: 150px;
+		height: 20px;
+		color: white;
 	}
 
 	input.date:before {
-	    position: absolute;
-	    top: 3px; left: 3px;
-	    content: attr(data-date);
-	    display: inline-block;
-	    color: black;
+		position: absolute;
+		top: 3px;
+		left: 3px;
+		content: attr(data-date);
+		display: inline-block;
+		color: black;
 	}
 
-	input.date::-webkit-datetime-edit, input::-webkit-inner-spin-button, input::-webkit-clear-button {
-	    display: none;
+	input.date::-webkit-datetime-edit,
+	input::-webkit-inner-spin-button,
+	input::-webkit-clear-button {
+		display: none;
 	}
 
 	input.date::-webkit-calendar-picker-indicator {
-	    position: absolute;
-	    top: 3px;
-	    right: 0;
-	    color: black;
-	    opacity: 1;
+		position: absolute;
+		top: 3px;
+		right: 0;
+		color: black;
+		opacity: 1;
 	}
 </style>
 <div class="white vh-100 vw-100" style="position: fixed;left: 0vw;z-index: -1;">
@@ -40,13 +46,7 @@
 		<div class="container h-100">
 			<div class="row align-items-center text-left h-100">
 				<div class="col-12 col-lg-6">
-					<?php if ($this->session->has_userdata('login')): ?>
-						<div class="alert alert-success" role="alert">
-							Halo <a href="#" class="alert-link"><?php echo $this->session->userdata('nama'); ?></a>, anda sudah tercatat dalam daftar Kehadiran</a>
-						</div>
-					<?php endif; ?>
-					<form class="card my-4 text-center rounded-lg" action="<?php echo base_url('regis') ?>" method="post" style="padding:1.5rem!important">
-
+					<form id="form" class="card my-4 text-center rounded-lg" method="post" style="padding:1.5rem!important">
 						<h4 class="card-title mt-4"><strong>Catat Hadir</strong></h4>
 						<h6 class="mb-4"><?php echo $bicorner[0]->nama ?></h6>
 						<input type="text" class="form-control" placeholder="Nama" name="Id_perpustakaan" value="<?php echo encrypt_url($bicorner[0]->Id_perpustakaan) ?>" hidden>
@@ -81,7 +81,7 @@
 						<button class="btn btn-indigo rounded-pill my-4 btn-block" type="submit">Catat Kehadiran</button>
 
 						<p class="text-center">Sudah punya akun?
-								<a href="<?php echo base_url('login/'.$bicoid) ?>">Catat Kehadiran Disini</a>
+							<a href="<?php echo base_url('login/' . $bicoid) ?>">Catat Kehadiran Disini</a>
 						</p>
 
 					</form>
@@ -100,17 +100,27 @@
 
 
 <script>
-$("#dateinput").on("change", function() {
-    this.setAttribute(
-        "data-date",
-        moment(this.value, "YYYY-MM-DD")
-        .format( this.getAttribute("data-date-format") )
-    )
-}).trigger("change")
+	$("#form").submit(function() {
+		var value = $(this).serialize()
+		$.post("<?php echo base_url('regis'); ?>", value)
+			.done(function(data, status) {
+				if (data != false){
+					alert("Selamat berhasil mendaftar.")
+					window.location.replace = <?php base_url() ?>
+				}
+				else
+					alert("Server mengalami masalah.")
+			})
+			.fail(function(e, status, thrown) {
+				alert("Server mengalami masalah.")
+			})
+	})
 
-$(document).on('click','.pass_show .ptxt', function(){
-	$(this).toggleClass("fa-eye-slash");
-	$(this).toggleClass("black-text");
-	$('#defaultSubscriptionFormEmail').attr('type', function(index, attr){return attr == 'password' ? 'text' : 'password'; });
-});
+	$(document).on('click', '.pass_show .ptxt', function() {
+		$(this).toggleClass("fa-eye-slash");
+		$(this).toggleClass("black-text");
+		$('#defaultSubscriptionFormEmail').attr('type', function(index, attr) {
+			return attr == 'password' ? 'text' : 'password';
+		});
+	});
 </script>

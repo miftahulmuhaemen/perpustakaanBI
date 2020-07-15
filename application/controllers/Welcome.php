@@ -76,17 +76,18 @@ class Welcome extends CI_Controller
 
 	function hadir($value)
 	{
-		if (decrypt_url($value) == "")
-		$data['page']			= 'kunjungan';
-		$data['title'] 			= 'Regis Pengunjung';
-		$data['bicoid']			= $value;
-		$data['bicorner'] 	= $this->m_perpustakaan->getById(decrypt_url($value));
-		if (sizeof($data['bicorner']) < 1) {
-			$data['bicorner'] 	= $this->m_perpustakaan->getById(0);
-			print_r($data['bicorner']);
+		if (decrypt_url($value) != null) {
+			$data['page']			= 'kunjungan';
+			$data['title'] 			= 'Regis Pengunjung';
+			$data['bicoid']			= $value;
+			$data['bicorner'] 	= $this->m_perpustakaan->getById(decrypt_url($value));
+			if (sizeof($data['bicorner']) < 1) {
+				$data['bicorner'] 	= $this->m_perpustakaan->getById(0);
+			}
+			$this->m_pages->v_page($data);
+		} else {
+			redirect(base_url());
 		}
-
-		$this->m_pages->v_page($data);
 	}
 
 	public function simpanUser($value = '')
@@ -123,25 +124,10 @@ class Welcome extends CI_Controller
 				}
 				$data[$key]		= $value;
 			}
-
-			$data_session = array(
-				'id'					=> 'guest',
-				'nama'        => $data['nama'],
-				'level'       => 6,
-				'perpustakaan' => $this->m_perpustakaan->getById(decrypt_url($data['Id_perpustakaan'])),
-				'instansi'    => $data['instansi'],
-				'login'       => 0
-			);
-			$this->session->set_userdata($data_session);
 		}
 
-		$this->db->insert('tb_pengunjung', $data);
-
-		if ($this->session->userdata('login') == 1) {
-			redirect(base_url());
-		} else {
-			redirect(base_url('hadir/' . $data['Id_perpustakaan']));
-		}
+		echo json_encode($this->db->insert('tb_pengunjung', $data));
+		
 	}
 
 	function email_check()

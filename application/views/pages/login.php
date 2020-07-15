@@ -73,7 +73,7 @@
 					<div class="row mb-3">
 						<div class="col">
 							<label>Surel</label>
-							<input type="email" class="form-control" id="reset-password-email" required>
+							<input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" id="reset-password-email" required>
 						</div>
 					</div>
 				</div>
@@ -111,16 +111,14 @@
 
 	function sendReset(token, email) {
 
-		$.post('<?php echo site_url('resetpassword/sendReset') ?>', {
+		$.post('<?php echo site_url('ResetPassword/sendReset') ?>', {
 				token: token,
 				email: email
 			}).done(function(data,status) {
-				console.log(data,status)
 				hideButtonLoading(btnSend, 'Kirim')
 				footerResponse(true)
 			})
 			.fail(function(e, _, __) {
-				console.log(e, _)
 				hideButtonLoading(btnSend, 'Kirim')
 				footerResponse(false)
 			})
@@ -129,7 +127,7 @@
 
 	function getToken(ID, email) {
 
-		$.post('<?php echo site_url('resetpassword/insertToken') ?>', {
+		$.post('<?php echo site_url('ResetPassword/insertToken') ?>', {
 				memberID: ID
 			}).done(function(data, status) {
 				var response = $.parseJSON(data)
@@ -155,7 +153,7 @@
 			} else {
 				showButtonLoading(btnSend)
 				var email = $('#reset-password-email').val()
-				$.post('<?php echo site_url('resetpassword/checkEmailAvailability') ?>', {
+				$.post('<?php echo site_url('ResetPassword/checkEmailAvailability') ?>', {
 						email: email
 					})
 					.done(function(data, status) {

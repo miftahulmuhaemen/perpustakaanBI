@@ -7,7 +7,7 @@ class ResetPassword extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('m_resetpassword');
+    $this->load->model('M_resetpassword');
     $this->load->library('email');
     $this->load->config('email');
   }
@@ -18,7 +18,7 @@ class ResetPassword extends CI_Controller
       'email'   => $this->input->post('email'),
     );
 
-    $data = $this->m_resetpassword->checkEmailAvailability($postData);
+    $data = $this->M_resetpassword->checkEmailAvailability($postData);
     echo json_encode($data);
   }
 
@@ -36,7 +36,7 @@ class ResetPassword extends CI_Controller
       'Id_anggota' => $memberID,
     );
 
-    $response = $this->m_resetpassword->resetPassword($postData, $where);
+    $response = $this->M_resetpassword->resetPassword($postData, $where);
     echo json_encode($response);
   }
 
@@ -52,7 +52,7 @@ class ResetPassword extends CI_Controller
       'createdAt' => $date
     );
 
-    $response = $this->m_resetpassword->insertToken($postData);
+    $response = $this->M_resetpassword->insertToken($postData);
     if ($response) {
       echo json_encode($postData);
     }
@@ -62,7 +62,7 @@ class ResetPassword extends CI_Controller
   {
     $get = $this->base64url_decode($this->input->post('token'));
     $token = substr($get, 0, 30);
-    $response = $this->m_resetpassword->isTokenValid(array('token' => $token));
+    $response = $this->M_resetpassword->isTokenValid(array('token' => $token));
     echo json_encode($response);
   }
 
